@@ -1,34 +1,46 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import Login from './components/Login'
+import Home from './components/Home'
+import About from './components/About'
+import Contact from './components/Contact'
+import Table from './components/Table'
 import './App.css'
+import Form from './components/Form'
+import ExcelUploader from './components/ExcelUploader'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Router>
+      <Box sx={{ width: '100vw' }}>
+        <AppBar position="static" sx={{ width: '100%' }}>
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              MyApp
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <Button color="inherit" component={Link} to="/login">Login</Button>
+              <Button color="inherit" component={Link} to="/about">About</Button>
+              <Button color="inherit" component={Link} to="/contact">Contact</Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Routes>
+        <Route path="/" element={<ExcelUploader />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/table" element={<Table />} />
+      </Routes>
+    </Router>
   )
 }
 
